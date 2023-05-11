@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+
+  <title>Mail Compose</title>
+
+  <link rel="stylesheet" type="text/css" href="js/bootstrap-wysihtml5/bootstrap-wysihtml5.css" />
+
+    <div th:insert="~{common::#headscript}"></div>
+
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <div th:insert="~{common::#leftmenu}"></div>
+    
+    <!-- main content start-->
+    <div class="main-content" style="min-height: 800px">
+
+        <div th:insert="~{common::#headmenu}"></div>
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="mail-box">
+                <section class="mail-box-info">
+                    <header class="header">
+                        <div class="btn-toolbar">
+                            <h4 class="pull-left">
+                                草稿箱
+                            </h4>
+                        </div>
+
+                    </header>
+
+                    <section class="mail-list">
+                        <div class="compose-mail">
+                            <form role="form-horizontal" th:action="@{/draft}" method="post">
+                                <label style="size: A3;color: red" th:text="${error_draft}"></label>
+                                <div class="form-group">
+                                    <label for="to" class="">收件人:</label>
+                                    <input type="text" name="m_to" tabindex="1" id="to" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="subject" class="">主题:</label>
+                                    <input type="text" name="m_subject" tabindex="1" id="subject" class="form-control">
+                                </div>
+
+                                <div class="compose-editor">
+                                    <textarea name="m_content" class="wysihtml5 form-control" rows="9"></textarea>
+                                    <input type="file" placeholder="选择图片" class="default">
+                                </div>
+                                <hr/>
+                                <div class="compose-btn">
+                                    <input type="hidden" name="opt" id="op"/>
+                                    <button name="btn-value" value="save" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> 保存</button>
+                                    <button name="btn-value" value="time_send" class="btn btn-sm btn-default">定时发送</button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="time" class="">定时选择:</label>
+                                    <input type="datetime-local"  name="time" tabindex="1" id="time" class="measureDate">
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+
+                </section>
+            </div>
+
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <!--<footer class="sticky-footer">-->
+            <!--2014 &copy; AdminEx by ThemeBucket-->
+        <!--</footer>-->
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.min.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+<script type="text/javascript" src="js/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
+<script type="text/javascript" src="js/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+
+
+<!--common scripts for all pages-->
+<script src="js/scripts.js"></script>
+
+<script>
+    jQuery(document).ready(function(){
+        $('.wysihtml5').wysihtml5();
+    });
+</script>
+
+<script type="text/javascript">
+    let date = new Date()
+    let yyyy = date.getFullYear()
+    let MM = (date.getMonth() + 1) < 10 ? ("0" + (date.getMonth() + 1)) : (date.getMonth() + 1)
+    let dd = date.getDate() < 10 ? ("0" + date.getDate()) : date.getDate()
+    let HH = date.getHours() < 10 ? ("0" + date.getHours()) : date.getHours()
+    let mm = date.getMinutes() < 10 ? ("0" + date.getMinutes()) : date.getMinutes()
+
+    let curDay = yyyy + '-' + MM + '-' + dd + 'T' + HH + ':' + mm;
+        $('.measureDate').val(curDay)
+         console.log(date)
+        // $.ajax({
+        //     type: "POST",
+        //     contentType: "application/json",
+        //     data: curDay,
+        //     dataType: "json",
+        //     success: function (data) {
+        //         alert(JSON.stringify(data));
+        //         ;
+        //
+        //     }
+        // });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+
+  <title>Mail Compose</title>
+
+  <link rel="stylesheet" type="text/css" href="js/bootstrap-wysihtml5/bootstrap-wysihtml5.css" />
+
+  <div th:insert="~{common::#headscript}"></div>
+
+<!--    <script th:inline="javascript">-->
+<!--        function send() {-->
+<!--            var btn=document.getElementById("op");-->
+<!--            btn.value="send";-->
+<!--        }-->
+<!--    </script>-->
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <div th:insert="~{common::#leftmenu}"></div>
+    
+    <!-- main content start-->
+    <div class="main-content" style="min-height: 800px">
+
+        <div th:insert="~{common::#headmenu}"></div>
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="mail-box">
+                <section class="mail-box-info">
+                    <header class="header">
+                        <div class="btn-toolbar">
+                            <h4 class="pull-left">
+                                发送邮件
+                            </h4>
+                        </div>
+
+                    </header>
+
+                    <section class="mail-list">
+                        <div class="compose-mail">
+                            <form role="form-horizontal"  th:action="@{/send}" enctype="multipart/form-data" method="post">
+                                <label style="size: A3;color: red" th:text="${error}"></label>
+                                <div class="form-group">
+                                    <label for="to" class="">收件人:</label>
+                                    <input name="m_to" required="required" type="text" tabindex="1" id="to" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="subject" class="">主题:</label>
+                                    <input name="m_subject" required="required" type="text" tabindex="1" id="subject" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                <textarea name="m_content" class="wysihtml5 form-control" rows="9"></textarea>
+                                </div>
+                                <div class="compose-editor" >
+                                    <input  name="lsbImage" required="required" type="file" class="default">
+<!--                                    <input type="hidden" name="lsbImage">-->
+<!--                                    <button name="select-value" value="upload">上传</button>-->
+<!--                                    <button name="select-value" value="delete">删除</button>-->
+                                </div>
+
+                                <hr/>
+                                <div  class="compose-btn">
+                                    <input type="hidden" name="opt" id="op"/>
+                                    <button   name="btn-value" value="send"  class="btn btn-primary btn-sm"><i class="fa fa-check"></i> 发送</button>
+                                    <button  name="btn-value" value="clear" class="btn btn-sm btn-default"><i class="fa fa-times"></i> 清除</button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </section>
+
+
+                </section>
+            </div>
+
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <!--<footer class="sticky-footer">-->
+            <!--2014 &copy; AdminEx by ThemeBucket-->
+        <!--</footer>-->
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<div th:insert="~{common::#commonscript}"></div>
+<script type= "text/javascript" src= "js/ajaxfileupload.js" ></script>
+<script type="text/javascript" src="js/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
+<script type="text/javascript" src="js/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+
+
+
+
+<script th:inline="javascript">
+    jQuery(document).ready(function(){
+        $('.wysihtml5').wysihtml5();
+    });
+</script>
+
+</body>
+</html>

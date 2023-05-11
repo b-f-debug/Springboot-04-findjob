@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.EmailDao">
+
+    <resultMap type="com.example.bean.Email" id="R_D_Map">
+        <result property="m_content" column="m_content" jdbcType="VARCHAR"/>
+        <result property="m_subject" column="m_subject" jdbcType="VARCHAR"/>
+        <result property="m_from" column="m_from" jdbcType="VARCHAR"/>
+        <result property="m_time" column="m_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap type="com.example.bean.Email" id="S_D_Map">
+        <result property="m_content" column="m_content" jdbcType="VARCHAR"/>
+        <result property="m_subject" column="m_subject" jdbcType="VARCHAR"/>
+        <result property="m_to" column="m_to" jdbcType="VARCHAR"/>
+        <result property="m_time" column="m_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap type="com.example.bean.Email" id="ReceiveMap">
+        <result property="m_id" column="m_id" jdbcType="INTEGER"/>
+        <result property="m_subject" column="m_subject" jdbcType="VARCHAR"/>
+        <result property="m_from" column="m_from" jdbcType="VARCHAR"/>
+        <result property="m_time" column="m_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap type="com.example.bean.Email" id="SendMap">
+        <result property="m_id" column="m_id" jdbcType="INTEGER"/>
+        <result property="m_subject" column="m_subject" jdbcType="VARCHAR"/>
+        <result property="m_to" column="m_to" jdbcType="VARCHAR"/>
+        <result property="m_time" column="m_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="S_D_List">
+        m_content,m_subject,m_to,m_time
+    </sql>
+
+    <sql id="Send_check_List">
+        m_id,m_subject,m_to,m_time
+    </sql>
+
+<!--    接收详情-->
+    <sql id="R_D_List">
+        m_content,m_subject,m_from,m_time
+    </sql>
+
+<!--    接收-->
+    <sql id="Receive_check_List">
+        m_id,m_subject,m_from,m_time
+    </sql>
+
+<!--发送邮件-->
+    <insert id="emailInsert" parameterType="com.example.bean.Email">
+        insert into email(m_content,m_subject,m_from,m_to,m_time,m_flag)
+        values (#{email,jdbcType=VARCHAR},#{m_subject,jdbcType=VARCHAR},#{m_from,jdbcType=VARCHAR},#{m_to,jdbcType=VARCHAR},now(),#{flag,jdbcType=BOOLEAN})
+    </insert>
+
+<!--    查看发送-->
+    <select id="queryAllBySend" parameterType="String" resultMap="SendMap">
+        select
+        <include refid="Send_check_List"></include>
+        from email
+        where m_from=#{m_from,jdbcType=VARCHAR}
+    </select>
+
+<!--    查看接收-->
+    <select id="queryAllByReceive" parameterType="String" resultMap="ReceiveMap">
+        select
+        <include refid="Receive_check_List"></include>
+        from email
+        where m_to=#{m_to,jdbcType=VARCHAR}
+    </select>
+
+<!--    发送详情-->
+    <select id="queryById" parameterType="int" resultMap="S_D_Map">
+        select
+        <include refid="S_D_List"></include>
+        from email
+        where m_id=#{m_id,jdbcType=INTEGER}
+    </select>
+
+<!--    接收详情-->
+    <select id="queryById_R" parameterType="int" resultMap="R_D_Map">
+        select
+        <include refid="R_D_List"></include>
+        from email
+        where m_id=#{m_id,jdbcType=INTEGER}
+    </select>
+    <select id="getMaxId" parameterType="String" resultType="Integer">
+        select max(m_id) from email where m_from=#{m_from,jdbcType=VARCHAR}
+    </select>
+
+
+</mapper>

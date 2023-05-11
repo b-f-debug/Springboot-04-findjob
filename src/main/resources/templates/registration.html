@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+
+    <title>Registration</title>
+
+    <div th:insert="~{common::#headscript}"></div>
+</head>
+
+<body class="login-body">
+
+<div class="container">
+
+    <form class="form-signin" th:action="@{/register}" method="post">
+        <div class="form-signin-heading text-center">
+            <h1 class="sign-title">新用户注册</h1>
+            <img src="images/logo_300x168.png" alt=""/>
+            <label style="color: red" th:text="${msg}"></label>
+        </div>
+        <div class="login-wrap">
+            <p>输入您的个人信息</p>
+            <input type="text" autofocus="" required="required" name="u_email" placeholder="邮箱" class="form-control">
+            <input type="password" autofocus="" required="required" id="u_password" name="u_password" placeholder="密码" class="form-control">
+
+            <label class="checkbox">
+                <input type="checkbox" required="required" value="agree this condition"> 我同意服务条款和隐私政策
+            </label>
+            <button type="submit" id="btsame" class="btn btn-lg btn-login btn-block">
+                <i class="fa fa-check"></i>
+            </button>
+
+            <div class="registration">
+                已经注册。
+                <a th:href="@{/login.html}" class="">
+                    去登陆
+                </a>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.min.js"></script>
+
+</body>
+</html>

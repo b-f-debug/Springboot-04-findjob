@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+
+    <title>已保存的邮件信息</title>
+
+    <!--data table-->
+    <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
+
+    <div th:insert="~{common::#headscript}"></div>
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <div th:insert="~{common::#leftmenu}"></div>
+
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <div th:insert="~{common::#headmenu}"></div>
+
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                已保存的草稿
+            </h3>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            邮件
+                            <span class="tools pull-right">
+                        <a href="javascript:;" class="fa fa-chevron-down"></a>
+                     </span>
+                        </header>
+                        <div class="panel-body">
+                            <div class="adv-table editable-table ">
+                                <div class="space15"></div>
+                                <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>邮件主题</th>
+                                        <th>接收人</th>
+                                        <th>创建时间</th>
+                                        <th>详情</th>
+                                        <th>删除</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="" th:each="detail,stats:${map}">
+                                        <td th:text="${stats.count}"></td>
+                                        <td th:text="${detail.value.d_subject}"></td>
+                                        <td th:text="${detail.value.d_to}"></td>
+                                        <td th:text="${#dates.format(detail.value.d_time,'yyy-MM-dd HH:mm:ss')}"></td>
+                                        <td><a class="check" name="" th:href="@{'/check_detail_save'(id=${detail.value.d_id})}">查看</a></td>
+                                        <td><a class="delete" name="" th:href="@{'/delete_detail_save'(id=${detail.value.d_id})}">删除</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer>
+            2014 &copy; AdminEx by ThemeBucket
+        </footer>
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+
+
+<!--data table-->
+<script type="text/javascript" src="js/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+
+<div th:insert="~{common::#commonscript}"></div>
+
+<!--script for editable table-->
+<script src="js/editable-table.js"></script>
+
+<!-- END JAVASCRIPTS -->
+<script>
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
+</script>
+
+</body>
+</html>

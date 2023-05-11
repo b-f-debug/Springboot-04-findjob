@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.FileImageDao">
+
+    <resultMap type="com.example.bean.FileImage" id="">
+        <result property="fileName" column="i_name" jdbcType="VARCHAR"/>
+        <result property="path" column="i_path" jdbcType="VARCHAR"/>
+        <result property="id" column="m_id" jdbcType="INTEGER"/>
+
+    </resultMap>
+<!--    接收-->
+    <sql id="Receive_check_List">
+        i_id,i_name,i_path,m_id
+    </sql>
+<!--发送邮件-->
+    <insert id="save" parameterType="com.example.bean.FileImage">
+        insert into f_image(i_name,i_path,m_id)
+        values (#{fileName},#{path},#{id})
+    </insert>
+</mapper>
